@@ -23,7 +23,7 @@ $(document).ready(function(){
   $( "#guess" ).submit(function( event ) {
     var input = +$("input").val();
     count += 1;
-    $('#feedback').text(input);
+    $('#guessList').append('<li>'+input+'</li>');
     $('#count').text(count);
     event.preventDefault();
   });
@@ -32,7 +32,7 @@ $(document).ready(function(){
     secretNumber = Math.floor(Math.random() * 100) + 1;
     count = 0;
     $('#count').text(count);
-    // alert(secretNumber);
+    $('#guessList li').remove();
   }
 });
 
