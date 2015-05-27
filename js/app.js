@@ -1,6 +1,7 @@
 
 $(document).ready(function(){
-  var secretNumber
+  var secretNumber;
+  var count = 0;
   newGame();
 
   /*--- Display information modal box ---*/
@@ -21,13 +22,17 @@ $(document).ready(function(){
 
   $( "#guess" ).submit(function( event ) {
     var input = +$("input").val();
-    alert(input);
+    count += 1;
+    $('#feedback').text(input);
+    $('#count').text(count);
     event.preventDefault();
   });
-});
 
-function newGame() {
-  secretNumber = Math.floor(Math.random() * 100) + 1
-  alert(secretNumber);
-}
+  function newGame() {
+    secretNumber = Math.floor(Math.random() * 100) + 1;
+    count = 0;
+    $('#count').text(count);
+    // alert(secretNumber);
+  }
+});
 
