@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
   var secretNumber;
   var count = 0;
@@ -22,9 +21,9 @@ $(document).ready(function(){
 
   $( "#guess" ).submit(function( event ) {
     var input = +$("input").val();
-    count += 1;
-    $('#guessList').append('<li>'+input+'</li>');
-    $('#count').text(count);
+    increaseCount(input);
+    var feedback = checkGuess(input);
+    $('#feedback').text(feedback);
     event.preventDefault();
   });
 
@@ -34,5 +33,27 @@ $(document).ready(function(){
     $('#count').text(count);
     $('#guessList li').remove();
   }
-});
 
+  function increaseCount(guess) {
+    count += 1;
+    $('#count').text(count);
+    $('#guessList').append('<li>'+guess+'</li>');
+  }
+
+  function checkGuess(guess) {
+    if (Math.abs(guess-secretNumber) >= 50) {
+      return 'Ice cold';
+    } else if (Math.abs(guess-secretNumber) > 30) {
+      return 'cold';
+    } else if (Math.abs(guess-secretNumber) > 20) {
+      return 'warm';
+    } else if (Math.abs(guess-secretNumber) > 10) {
+      return 'hot';
+    } else if (Math.abs(guess-secretNumber) > 1 ) {
+      return 'very hot';
+    } else {
+      newGame();
+      return 'You got it right!';
+    }
+  }
+});
