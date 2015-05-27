@@ -21,11 +21,18 @@ $(document).ready(function(){
 
   $( "#guess" ).submit(function( event ) {
     var input = +$("input").val();
+    if (input > 100 || input <= 0) {
+      return invalid();
+    }
     increaseCount(input);
     var feedback = checkGuess(input);
     $('#feedback').text(feedback);
     event.preventDefault();
   });
+
+  function invalid() {
+    $('#feedback').text('Please make a guess between 1 and 100');
+  }
 
   function newGame() {
     secretNumber = Math.floor(Math.random() * 100) + 1;
